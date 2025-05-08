@@ -7,6 +7,19 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/behaviors.h>
+
+// Encoder configuration
+/ {
+    encoder0: encoder_0 {
+        compatible = "zmk,encoder";
+        label = "Encoder 0";
+        // Update gpios to match your hardware
+        a-gpios = <&gpio0 2 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        b-gpios = <&gpio0 3 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        // Optionally set resolution, steps, etc.
+    };
+};
 
 // Uncomment this block if using RGB
 //&led_strip {
@@ -36,6 +49,9 @@
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
 
+            encoder-bindings = <
+                &inc_dec_kp C_VOL_UP C_VOL_DN
+            >;
         };
         function_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
