@@ -20,6 +20,12 @@
 ---
 include:
   - board: nice_nano_v2
-    shield: kyria_rev3_left
+    shields: 
+      - kyria_rev3_left 
+      - nice_view_adapter 
+      - nice_view
   - board: nice_nano_v2
-    shield: kyria_rev3_right
+    shields: 
+      - kyria_rev3_right 
+      - nice_view_adapter 
+      - nice_view

@@ -14,9 +14,22 @@
     // chain-length = <31>; // Uncomment if using both per-key and underglow LEDs
     // chain-length = <25>; // Uncomment if using only per-key LEDs.
 };
- */
+*/
 
 / {
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        row-gpios = <&gpio0 2 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
+                    <&gpio0 3 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        col-gpios = <&gpio0 4 GPIO_ACTIVE_LOW>,
+                    <&gpio0 5 GPIO_ACTIVE_LOW>;
+        diode-direction = "col2row";
+        label = "KSCAN";
+    };
+};
+
+
+/{
     keymap {
         compatible = "zmk,keymap";
 
