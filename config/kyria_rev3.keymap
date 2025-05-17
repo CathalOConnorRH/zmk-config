@@ -11,7 +11,7 @@
 /* Uncomment this block if using RGB
 &led_strip {
     chain-length = <6>;
-    // chain-length = <31>; // Uncomment if using both per-key and underglow LEDs
+    chain-length = <31>; // Uncomment if using both per-key and underglow LEDs
     // chain-length = <25>; // Uncomment if using only per-key LEDs.
 };
  */
@@ -50,5 +50,40 @@
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
+    };
+};
+
+/ {
+    aliases {
+        encoder0 = &encoder0;
+    };
+
+    encoder0: encoder_0 {
+        compatible = "gpio-rotary-encoder";
+        gpios = <&gpio0 2 (GPIO_ACTIVE_LOW)>,
+                <&gpio0 3 (GPIO_ACTIVE_LOW)>;  // Use actual GPIO pins
+        steps = <4>;
+        label = "Encoder 0";
+        linux,axis = <0>;
+    };
+};
+
+/ {
+    nice_view_pane {
+        compatible = "zmk,nice-view-pane";
+        status = "okay";
+    };
+};
+
+&spi1 {
+    status = "okay";
+    cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;  // Or your actual CS pin
+
+    nice_view: nice_view@0 {
+        compatible = "zmk,nice-view";
+        reg = <0>;
+        spi-max-frequency = <8000000>;
+        reset-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;  // Adjust if needed
+        label = "nice_view";
     };
 };
