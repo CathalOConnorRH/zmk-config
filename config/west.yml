@@ -9,5 +9,11 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: nice_view_adapter
+      path: modules/nice_view_adapter
   self:
     path: config
+    west-commands: scripts/west-commands.yml
+    modules:
+      - name: nice_view_adapter
+        path: modules/nice_view_adapter
