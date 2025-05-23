@@ -1,0 +1,12 @@
+if SHIELD_NICE_VIEW_ADAPTER
+
+config ZMK_DISPLAY
+    default y
+
+config SPI
+    default y
+
+config DISPLAY
+    default y
+
+endif # SHIELD_NICE_VIEW_ADAPTER 
