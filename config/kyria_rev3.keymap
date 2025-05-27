@@ -22,6 +22,16 @@
 
 &caps_word { continue-list = <UNDERSCORE MINUS>; };
 
+&sensors {
+    compatible = "zmk,keymap-sensors";
+    sensors = <&right_encoder>;
+    triggers-per-rotation = <20>;
+};
+
+&right_encoder {
+    status = "okay";
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
@@ -35,11 +45,11 @@
             bindings = <
             &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                  &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
             &kp TAB   &kp A &kp S &kp D &kp F &kp G                                                  &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp LSHFT &kp LSHFT            &mo 1   &kp LSHFT &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mo 1
+            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp LSHFT &kp LSHFT            &none   &kp LSHFT &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mo 1
                                   &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC       &kp RET &kp SPACE &kp TAB &kp BSPC &kp RALT
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
         function_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +60,7 @@
             bindings = <
             &studio_unlock &trans &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2              &trans &trans &trans &trans &trans &trans
             &trans &trans &trans     &bt BT_SEL 3 &bt BT_SEL 4 &trans                    &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans &trans &trans &trans        &none &trans &trans &trans &trans &trans &trans &trans
                                  &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans
             >;
 
@@ -58,3 +68,4 @@
         };
     };
 };
+
