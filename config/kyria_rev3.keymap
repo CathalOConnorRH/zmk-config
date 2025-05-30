@@ -12,26 +12,31 @@
 #include <dt-bindings/zmk/rgb.h>
 
 &led_strip {
-    chain-length = <31>;// Uncomment if using both per-key and underglow LEDs
+    chain-length = <31>;
 };
 
-// Proper nice!view configuration
+/ {
+    chosen {
+        zephyr,display = &nice_view;
+    };
+
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+};
+
+&right_encoder {
+    status = "okay";
+};
+
 &nice_view_spi {
     status = "okay";
     cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
 };
 
 &caps_word { continue-list = <UNDERSCORE MINUS>; };
-
-&sensors {
-    compatible = "zmk,keymap-sensors";
-    sensors = <&right_encoder>;
-    triggers-per-rotation = <20>;
-};
-
-&right_encoder {
-    status = "okay";
-};
 
 / {
     keymap {
