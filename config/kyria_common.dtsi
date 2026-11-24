@@ -5,6 +5,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/led/led.h>
 
 #include "kyria-layouts.dtsi"
 
@@ -50,6 +51,7 @@
         compatible = "worldsemi,ws2812-gpio";
         chain-length = <31>;
         gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>; /* D3 */
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
 };
 
