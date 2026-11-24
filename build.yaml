@@ -11,11 +11,19 @@
 #   - board: nice_nano_v2
 #     shield: reviung41
 #
+# Board names follow ZMK main (HWMv2): nice_nano_v2 -> nice_nano (rev 2.0.0
+# default) + required "zmk" variant. nice_view_adapter is NOT used: its default
+# SCK (D3/P0.20) collides with the Kyria matrix; SPI is defined by hand in each
+# half's .overlay (CS=D1, MOSI=D2, SCK=D9/P1.06).
+# Order matters: Zephyr applies shield overlays strictly in -DSHIELD order
+# (user config overlays last, and overlays cannot forward-reference labels).
+# overlays in -DSHIELD order and user config overlays last, so nice_view.overlay
+# needs nice_view_spi to already exist when it is parsed.
 ---
 include:
-  - board: nice_nano_v2
-    shield: kyria_rev3_left nice_view_adapter nice_view
+  - board: nice_nano//zmk
+    shield: kyria_nice_view_adapter nice_view kyria_rev3_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
-  - board: nice_nano_v2
-    shield: kyria_rev3_right nice_view_adapter nice_view
+  - board: nice_nano//zmk
+    shield: kyria_nice_view_adapter nice_view kyria_rev3_right
