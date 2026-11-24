@@ -1,0 +1,13 @@
+# Board names follow ZMK main (HWMv2): nice_nano_v2 -> nice_nano (defaults to rev 2.0.0)
+# with the required "zmk" variant.
+# Each Kyria half is an INDEPENDENT keyboard (no CONFIG_ZMK_SPLIT): plug a half
+# in over USB or pair it over BLE; the TRRS jack only shares power/battery.
+# nice_view shield supplies the nice!view (Sharp LS0xx) driver node, status
+# widgets and zephyr,display chosen. The SPI bus (nice_view_spi) is defined in
+# each half's .overlay (D1=CS, D2=MOSI, D9=SCK) because D3 — the stock
+# nice_view_adapter default — is used by the Kyria matrix.
+include:
+  - board: nice_nano//zmk
+    shield: kyria_rev3_left nice_view
+  - board: nice_nano//zmk
+    shield: kyria_rev3_right nice_view

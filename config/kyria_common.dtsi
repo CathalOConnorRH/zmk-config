@@ -10,7 +10,7 @@
 
 / {
     chosen {
-        zephyr,display = &oled;
+        /* zephyr,display is set by the nice_view shield overlay */
         zmk,kscan = &kscan0;
         zmk,physical-layout = &splitkb_kyria_6col_layout;
     };
@@ -43,19 +43,16 @@
     // TODO: RGB node(s)
 };
 
+/* SSD1306 I2C OLED removed in favour of nice!view (SPI).
+ * The OLED socket's VCC/GND are still used to power the nice!view.
+ * Keep the old node around (disabled) so nothing else breaks on &oled.
+ */
 &pro_micro_i2c {
-    status = "okay";
+    status = "disabled";
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
-        width = <128>;
-        height = <64>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <63>;
-        prechargep = <0x22>;
-        inversion-on;
+        status = "disabled";
     };
 };
