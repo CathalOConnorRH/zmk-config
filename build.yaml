@@ -22,8 +22,8 @@
 ---
 include:
   - board: nice_nano//zmk
-    shield: kyria_nice_view_adapter nice_view kyria_rev3_left
+    shield: kyria_nice_view_adapter nice_view kyria_rev3_left raw_hid_adapter
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: nice_nano//zmk
-    shield: kyria_nice_view_adapter nice_view kyria_rev3_right
+    shield: kyria_nice_view_adapter nice_view kyria_rev3_right raw_hid_adapter

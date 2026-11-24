@@ -17,10 +17,20 @@ manifest:
       url-base: https://github.com/petejohanson
     - name: roblim
       url-base: https://github.com/roblim
+    - name: zzeneg # zmk-raw-hid, needed by KeyPeek
+      url-base: https://github.com/zzeneg
+    - name: srwi # zmk-keypeek-layer-notifier
+      url-base: https://github.com/srwi
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: zmk-raw-hid
+      remote: zzeneg
+      revision: main
+    - name: zmk-keypeek-layer-notifier
+      remote: srwi
+      revision: master
   self:
     path: config
