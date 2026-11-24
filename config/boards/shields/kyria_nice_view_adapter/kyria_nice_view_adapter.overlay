@@ -32,5 +32,7 @@ nice_view_spi: &spi0 {
     pinctrl-0 = <&kyria_nice_view_spi_default>;
     pinctrl-1 = <&kyria_nice_view_spi_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&pro_micro 1 GPIO_ACTIVE_HIGH>;
+    /* CS = D0 (P0.13), NOT D1: on this kit D1 clashes with LED wiring
+       (empirical, from the old branch note "D1 is shared with LED's"). */
+    cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
 };
