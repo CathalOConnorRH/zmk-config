@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Cathal O'Connor
+# SPDX-License-Identifier: MIT
+
+config SHIELD_KYRIA_NICE_VIEW_ADAPTER
+    def_bool $(shields_list_contains,kyria_nice_view_adapter)
