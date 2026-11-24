@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyria rev3 + nice!view Wiring</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body { background:#020617; color:#e2e8f0; font-family:'JetBrains Mono',monospace; margin:0; padding:32px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  .sub { color:#64748b; font-size:12px; margin-bottom:20px; }
+  .frame { border:1px solid #1e293b; border-radius:12px; padding:16px; max-width:960px; }
+  .note { max-width:960px; color:#94a3b8; font-size:12px; margin-top:16px; line-height:1.6; }
+  .note b { color:#e2e8f0; }
+</style>
+</head>
+<body>
+<h1><span style="color:#34d399">&#9679;</span> Kyria rev3 &nbsp;&#8594;&nbsp; nice!view wiring (same on both halves)</h1>
+<div class="sub">CS=D1 &middot; MOSI=D2 &middot; SCL=D9 &middot; power reused from OLED socket &mdash; matches config/boards/shields/kyria_nice_view_adapter/</div>
+
+<div class="frame">
+<svg viewBox="0 0 920 420" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="920" height="420" fill="#020617"/>
+  <rect width="920" height="420" fill="url(#grid)"/>
+
+  <!-- wires (drawn first, behind boxes) -->
+  <!-- VCC red, GND black-ish, CS amber, MOSI cyan, SCL violet -->
+  <path d="M 300 90 H 420 V 70 H 560" fill="none" stroke="#f87171" stroke-width="2.5"/>
+  <path d="M 300 140 H 440 V 120 H 560" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+  <path d="M 300 190 H 460 V 170 H 560" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+  <path d="M 300 240 H 480 V 220 H 560" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
+  <path d="M 300 290 H 500 V 270 H 560" fill="none" stroke="#a78bfa" stroke-width="2.5"/>
+
+  <!-- nice!view box -->
+  <rect x="100" y="52" width="200" height="270" rx="6" fill="#0f172a"/>
+  <rect x="100" y="52" width="200" height="270" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="200" y="38" text-anchor="middle" fill="#22d3ee" font-size="14" font-weight="700">nice!view (LM015A75144)</text>
+  <g font-size="13" fill="#e2e8f0">
+    <text x="120" y="95">VCC</text>
+    <text x="120" y="145">GND</text>
+    <text x="120" y="195">CS</text>
+    <text x="120" y="245">MOSI</text>
+    <text x="120" y="295">SCL</text>
+  </g>
+  <g fill="#0f172a" stroke-width="1.5">
+    <circle cx="292" cy="90" r="6" stroke="#f87171"/>
+    <circle cx="292" cy="140" r="6" stroke="#94a3b8"/>
+    <circle cx="292" cy="190" r="6" stroke="#fbbf24"/>
+    <circle cx="292" cy="240" r="6" stroke="#22d3ee"/>
+    <circle cx="292" cy="290" r="6" stroke="#a78bfa"/>
+  </g>
+
+  <!-- nice!nano box -->
+  <rect x="560" y="32" width="260" height="310" rx="6" fill="#0f172a"/>
+  <rect x="560" y="32" width="260" height="310" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+  <text x="690" y="20" text-anchor="middle" fill="#34d399" font-size="14" font-weight="700">nice!nano v2 (inner pin row)</text>
+  <g font-size="13" fill="#e2e8f0">
+    <text x="580" y="75">D10 / 3V3 &nbsp;<tspan fill="#64748b">power rail</tspan></text>
+    <text x="580" y="125">D11 / GND &nbsp;<tspan fill="#64748b">power rail</tspan></text>
+    <text x="580" y="175">D1 &nbsp;<tspan fill="#64748b">P0.06</tspan></text>
+    <text x="580" y="225">D2 &nbsp;<tspan fill="#64748b">P0.17</tspan></text>
+    <text x="580" y="275">D9 &nbsp;<tspan fill="#64748b">P1.06</tspan></text>
+  </g>
+  <g fill="#0f172a" stroke-width="1.5">
+    <circle cx="568" cy="70" r="6" stroke="#f87171"/>
+    <circle cx="568" cy="120" r="6" stroke="#94a3b8"/>
+    <circle cx="568" cy="170" r="6" stroke="#fbbf24"/>
+    <circle cx="568" cy="220" r="6" stroke="#22d3ee"/>
+    <circle cx="568" cy="270" r="6" stroke="#a78bfa"/>
+  </g>
+
+  <!-- warning: NOT D3 -->
+  <rect x="560" y="360" width="260" height="44" rx="6" fill="#0f172a"/>
+  <rect x="560" y="360" width="260" height="44" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="572" y="379" fill="#fb7185" font-size="12" font-weight="600">&#9888; NOT the adapter default SCL:</text>
+  <text x="572" y="396" fill="#fb7185" font-size="11">D3/P0.20 is Kyria matrix (col6/row4)</text>
+
+  <!-- OLED socket note -->
+  <rect x="100" y="360" width="200" height="44" rx="6" fill="#0f172a"/>
+  <rect x="100" y="360" width="200" height="44" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="112" y="379" fill="#fbbf24" font-size="12" font-weight="600">OLED socket SDA/SCL:</text>
+  <text x="112" y="396" fill="#fbbf24" font-size="11">leave unconnected (I2C unused)</text>
+</svg>
+</div>
+
+<div class="note">
+<b>Both halves:</b> same 5 wires on left and right nice!nano.<br>
+<b>Power:</b> VCC/GND can come from the nice!nano inner-row 3V3/GND pins or the existing OLED breakout.<br>
+<b>Split:</b> halves stay independent keyboards (BLE to Mac); the TRRS jack only shares power.<br>
+<b>Firmware:</b> branch <b>feat/nice-view-displays</b> &mdash; bus defined by <b>kyria_nice_view_adapter</b> shield, listed before <b>nice_view</b> in build.yaml.
+</div>
+</body>
+</html>
