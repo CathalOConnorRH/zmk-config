@@ -1,11 +1,14 @@
-# Copyright (c) 2026 Cathal O'Connor
-# SPDX-License-Identifier: MIT
-# Kyria-specific nice!view SPI bus definer.
-# The stock nice_view_adapter shield hard-wires SCK to D3/P0.20, which the
-# Kyria matrix already uses (col6 on the left half, row4 on the right half).
-# This adapter re-pins the bus: CS=D1 (P0.06), MOSI=D2 (P0.17), SCK=D9 (P1.06).
-# List it BEFORE nice_view in build.yaml: shield overlays are applied in
-# -DSHIELD order and nice_view.overlay references &nice_view_spi.
+/*
+ * Copyright (c) 2026 Cathal O'Connor
+ * SPDX-License-Identifier: MIT
+ *
+ * Kyria-specific nice!view SPI bus definer.
+ * The stock nice_view_adapter shield hard-wires SCK to D3/P0.20, which the
+ * Kyria matrix already uses (col6 on the left half, row4 on the right half).
+ * This adapter re-pins the bus: CS=D1 (P0.06), MOSI=D2 (P0.17), SCK=D9 (P1.06).
+ * Listed BEFORE nice_view in build.yaml: shield overlays are applied in
+ * -DSHIELD order and nice_view.overlay references &nice_view_spi.
+ */
 
 &pinctrl {
     kyria_nice_view_spi_default: kyria_nice_view_spi_default {
