@@ -60,3 +60,13 @@ nice_view_spi: &spi0 {
     pinctrl-names = "default", "sleep";
     cs-gpios = <&pro_micro 1 GPIO_ACTIVE_HIGH>;
 };
+
+/* The kyria board overlay (kyria/boards/nice_nano_nrf52840_zmk.overlay)
+ * re-points chosen zephyr,display at the (now disabled) SSD1306. Re-assert
+ * nice!view here: user config overlays load after all shield overlays.
+ */
+/ {
+    chosen {
+        zephyr,display = &nice_view;
+    };
+};
