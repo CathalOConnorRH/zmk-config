@@ -5,13 +5,12 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <dt-bindings/led/led.h>
 
 #include "kyria-layouts.dtsi"
 
 / {
     chosen {
-        /* zephyr,display is set by the nice_view shield overlay */
+        zephyr,display = &oled;
         zmk,kscan = &kscan0;
         zmk,physical-layout = &splitkb_kyria_6col_layout;
     };
@@ -40,46 +39,27 @@
         sensors = <&left_encoder &right_encoder>;
         triggers-per-rotation = <20>;
     };
-
-    /* Underglow / per-key RGB: the factory Kyria rev3 LED chain (DIN wired to
-     * Pro Micro D3/P0.20 on the PCB). ZMK's kyria nice!nano board overlay
-     * defines an SPI-backed strip on P0.06 — kill it (P0.06 must stay free)
-     * and bit-bang the chain from D3 instead. chain-length=31 = 25 per-key
-     * SK6812 + 6 underglow WS2812B (matches the old &led_strip setting).
-     */
-    kyria_ws2812: kyria_ws2812 {
-        compatible = "worldsemi,ws2812-gpio";
-        chain-length = <31>;
-        gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>; /* D3 */
-        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
-    };
 };
 
-/ {
-    chosen {
-        zmk,underglow = &kyria_ws2812;
-    };
-};
-
-/* Stock SPI ws2812 on spi3/P0.06 from kyria/boards/nice_nano_nrf52840_zmk.overlay */
-&spi3 {
-    status = "disabled";
-};
-
-&led_strip {
-    status = "disabled";
-};
-
-/* SSD1306 I2C OLED removed in favour of nice!view (SPI).
- * The OLED socket's VCC/GND are still used to power the nice!view.
- * Keep the old node around (disabled) so nothing else breaks on &oled.
+/* RGB underglow + per-key LEDs use ZMK's STOCK kyria nice!nano overlay strip
+ * (worldsemi,ws2812-spi on spi3 / P0.06 = Pro Micro D1). OLED occupies the
+ * I2C pair D2/D3, so the D3 bit-bang variant from the nice!view branch is
+ * NOT usable here. chain-length is set via &led_strip in the keymap.
  */
+
 &pro_micro_i2c {
-    status = "disabled";
+    status = "okay";
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
-        status = "disabled";
+        width = <128>;
+        height = <64>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;
+        prechargep = <0x22>;
+        inversion-on;
     };
 };

@@ -27,22 +27,3 @@
 &left_encoder {
     status = "okay";
 };
-/* ── nice!view (left half) ───────────────────────────────────────────────
- * Wiring (nice!nano v2):
- *   nice!view VCC -> OLED socket VCC
- *   nice!view GND -> OLED socket GND
- *   nice!view CS  -> D1  (P0.06)
- *   nice!view MOSI-> D2  (P0.17)
- *   nice!view SCL -> D9  (P1.06)   NOTE: not the adapter-shield default D3!
- * D3/P0.20 is used by the Kyria matrix (col6 here, row4 on the right half),
- * so the stock nice_view_adapter shield cannot be used; pins set by hand.
- */
-/* The kyria board overlay (kyria/boards/nice_nano_nrf52840_zmk.overlay)
- * re-points chosen zephyr,display at the (now disabled) SSD1306. Re-assert
- * nice!view here: user config overlays load after all shield overlays.
- */
-/ {
-    chosen {
-        zephyr,display = &nice_view;
-    };
-};

@@ -31,17 +31,3 @@
 &right_encoder {
     status = "okay";
 };
-/* ── nice!view (right half) ──────────────────────────────────────────────
- * Wiring identical to the left half:
- *   VCC/GND -> OLED socket, CS -> D1 (P0.06), MOSI -> D2 (P0.17),
- *   SCL -> D9 (P1.06).  D3 (adapter default) conflicts with the matrix.
- */
-/* The kyria board overlay (kyria/boards/nice_nano_nrf52840_zmk.overlay)
- * re-points chosen zephyr,display at the (now disabled) SSD1306. Re-assert
- * nice!view here: user config overlays load after all shield overlays.
- */
-/ {
-    chosen {
-        zephyr,display = &nice_view;
-    };
-};

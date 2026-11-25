@@ -11,10 +11,8 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/rgb.h>
 
-// Proper nice!view configuration
-&nice_view_spi {
-    status = "okay";
-    cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
+&led_strip {
+    chain-length = <31>; // 25 per-key SK6812 + 6 underglow WS2812B
 };
 
 &caps_word { continue-list = <UNDERSCORE MINUS>; };
