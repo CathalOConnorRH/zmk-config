@@ -5,7 +5,8 @@
  * Kyria-specific nice!view SPI bus definer.
  * The stock nice_view_adapter shield hard-wires SCK to D3/P0.20, which the
  * Kyria matrix already uses (col6 on the left half, row4 on the right half).
- * This adapter re-pins the bus: CS=D1 (P0.06), MOSI=D2 (P0.17), SCK=D9 (P1.06).
+ * This adapter re-pins the bus onto the OLED socket: SCK=D2 (P0.17),
+ * MOSI=D3 (P0.20), plus ONE hidden CS wire to D9 (P1.06) on the nice!nano.
  * Listed BEFORE nice_view in build.yaml: shield overlays are applied in
  * -DSHIELD order and nice_view.overlay references &nice_view_spi.
  */
@@ -13,14 +14,14 @@
 &pinctrl {
     kyria_nice_view_spi_default: kyria_nice_view_spi_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 6)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 20)>;
         };
     };
     kyria_nice_view_spi_sleep: kyria_nice_view_spi_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 6)>,
-                    <NRF_PSEL(SPIM_MOSI, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 17)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 20)>;
             low-power-enable;
         };
     };
@@ -32,7 +33,8 @@ nice_view_spi: &spi0 {
     pinctrl-0 = <&kyria_nice_view_spi_default>;
     pinctrl-1 = <&kyria_nice_view_spi_sleep>;
     pinctrl-names = "default", "sleep";
-    /* CS = D0 (P0.13), NOT D1: on this kit D1 clashes with LED wiring
-       (empirical, from the old branch note "D1 is shared with LED's"). */
-    cs-gpios = <&pro_micro 0 GPIO_ACTIVE_HIGH>;
+    /* CS = D9 (P1.06): free pin at the controller position, hidden under the
+       display (Corne-style single-wire job). D1 (P0.06) stays with the LED DIN;
+       D0 (P0.08) stays spare for a future wired split. */
+    cs-gpios = <&pro_micro 9 GPIO_ACTIVE_HIGH>;
 };

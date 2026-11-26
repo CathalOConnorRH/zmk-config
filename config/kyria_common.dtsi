@@ -44,13 +44,13 @@
     /* Underglow / per-key RGB: the factory Kyria rev3 LED chain (DIN wired to
      * Pro Micro D3/P0.20 on the PCB). ZMK's kyria nice!nano board overlay
      * defines an SPI-backed strip on P0.06 — kill it (P0.06 must stay free)
-     * and bit-bang the chain from D3 instead. chain-length=31 = 25 per-key
+     * and bit-bang the chain from D1 (where the factory LED wire actually lands). chain-length=31 = 25 per-key
      * SK6812 + 6 underglow WS2812B (matches the old &led_strip setting).
      */
     kyria_ws2812: kyria_ws2812 {
         compatible = "worldsemi,ws2812-gpio";
         chain-length = <31>;
-        gpios = <&pro_micro 3 GPIO_ACTIVE_HIGH>; /* D3 */
+        gpios = <&pro_micro 1 GPIO_ACTIVE_HIGH>; /* D1 = factory LED DIN net (P0.06) */
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
 };
